@@ -1,0 +1,14 @@
+###################################################################
+#Credit Patrick Spencer
+#
+#This script will prompt for account name, first name and last name. 
+#It will then take those values and combine them to create various email aliases. 
+#Current entries will make: FirstName.Lastname@Domain.com, FLastName@Domain.com
+#Add additional Set-ADUser values for any other combinations neccessary
+###################################################################
+
+$SamAccountName= Read-Host -Prompt 'Input Username'
+$FirstName = Read-Host -Prompt 'Input Firstname'
+$Surname = Read-Host -Prompt 'Input Surname'
+Set-ADUser -Identity "$SamAccountName" -Add @{'proxyAddresses'="smtp:$SamAccountName@Domain1.com"}
+Set-ADUser -Identity "$SamAccountName" -Add @{'proxyAddresses'="smtp:$FirstName.$Surname@Domain2.com"}
